@@ -12,14 +12,11 @@ from telegram_noti import send_direct_message
 def main():
     _crawler = Crawler()
 
-    try:
-        is_trumtruyen_domain_work = _crawler.is_trumtruyen_domain_work()
-        if not is_trumtruyen_domain_work:
-            send_direct_message(msg="Trumtruyen domain might be changed!!!")
-            sys.exit(1)
-        _crawler.crawl_page(page=1)
-    except Exception as e:
-        ic(e)
+    is_trumtruyen_domain_work = _crawler.is_trumtruyen_domain_work()
+    if not is_trumtruyen_domain_work:
+        send_direct_message(msg="Trumtruyen domain might be changed!!!")
+        sys.exit(1)
+    _crawler.crawl_page(page=1)
 
 
 if __name__ == "__main__":
