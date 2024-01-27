@@ -95,6 +95,7 @@ class Crawler:
                 chapter_name=chapter_name,
                 chapter_href=chapter_href,
             )
+            sleep(1)
 
     def crawl_item(self, row: BeautifulSoup):
         try:

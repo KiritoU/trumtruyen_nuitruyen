@@ -303,6 +303,9 @@ class Nuitruyen:
         return comic_id
 
     def get_or_insert_comic(self, comic_details: dict) -> int:
+        if not comic_details.get("slug", ""):
+            return 0
+
         condition = f"""post_name = '{comic_details["slug"]}'"""
         be_post = self.database.select_all_from(table=f"posts", condition=condition)
         if not be_post:
