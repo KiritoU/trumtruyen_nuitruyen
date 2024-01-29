@@ -32,9 +32,16 @@ class Crawler:
     ) -> None:
         soup = helper.crawl_soup(chapter_href)
 
-        chapter_content = _chapter.get_chapter_content(
-            chapter_name=chapter_name, soup=soup
-        )
+        chapter_content = ""
+        for _ in range(3):
+            try:
+                chapter_content = _chapter.get_chapter_content(
+                    chapter_name=chapter_name, soup=soup
+                )
+                if chapter_content:
+                    break
+            except Exception as e:
+                sleep(5)
 
         if not chapter_content:
             return
