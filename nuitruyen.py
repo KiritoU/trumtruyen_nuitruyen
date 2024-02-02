@@ -260,7 +260,7 @@ class Nuitruyen:
             return 0
 
         comic_status = comic_data.get("trang-thai", "Đang ra")
-        if comic_status.lower() == "Hoàn Thành".lower():
+        if comic_status.lower() in ["Hoàn Thành".lower(), "Full".lower()]:
             comic_status = "Full"
         else:
             comic_status = "Đang ra"
