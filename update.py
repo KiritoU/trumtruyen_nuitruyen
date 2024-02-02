@@ -17,6 +17,7 @@ def main():
         if not is_trumtruyen_domain_work:
             send_direct_message(msg="Trumtruyen domain might be changed!!!")
             sys.exit(1)
+        ic("Crawling page 1...")
         _crawler.crawl_page(page=1)
     except Exception as e:
         ic(e)

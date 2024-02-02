@@ -171,7 +171,8 @@ class Nuitruyen:
                 [term.strip() for term in terms.split(",")] if not is_title else [terms]
             )
         except Exception as e:
-            logging.error(f"[-] Error in insert terms: {terms}")
+            if CONFIG.DEBUG:
+                logging.error(f"[-] Error in insert terms: {terms}")
             return
 
         term_ids = []

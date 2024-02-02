@@ -61,7 +61,8 @@ class Crawler:
                 content=chapter_content,
             )
 
-        logging.info(f"Inserted {chapter_name}")
+        if CONFIG.DEBUG:
+            logging.info(f"Inserted {chapter_name}")
 
     def crawl_comic(self, href: str):
         soup = helper.crawl_soup(href)
@@ -71,10 +72,12 @@ class Crawler:
                 f.write(json.dumps(comic_details, indent=4, ensure_ascii=False))
 
         comic_id = self._nuitruyen.get_or_insert_comic(comic_details)
-        logging.info(f"Got (or inserted) comic: {comic_id}")
+        if CONFIG.DEBUG:
+            logging.info(f"Got (or inserted) comic: {comic_id}")
 
         if not comic_id:
-            logging.error(f"Cannot crawl comic with: {href}")
+            if CONFIG.DEBUG:
+                logging.error(f"Cannot crawl comic with: {href}")
             return
 
         chapters = comic_details.get("chapters", {})
@@ -112,7 +115,8 @@ class Crawler:
             href = ""
 
         if not href:
-            logging.error("[-] Could not find href for item")
+            if CONFIG.DEBUG:
+                logging.error("[-] Could not find href for item")
             return
 
         self.crawl_comic(href=href)

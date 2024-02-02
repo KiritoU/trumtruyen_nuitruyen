@@ -30,7 +30,8 @@ class Helper:
         return requests.get(url, headers=self.get_header())
 
     def crawl_soup(self, url):
-        logging.info(f"[+] Crawling {url}")
+        if CONFIG.DEBUG:
+            logging.info(f"[+] Crawling {url}")
 
         html = self.download_url(url)
         soup = BeautifulSoup(html.content, "html.parser")
@@ -58,7 +59,7 @@ class Helper:
             imageResponse = requests.get(image_url, headers=headers, stream=True).raw
             return imageResponse
         except Exception as e:
-            print(e)
+            # print(e)
             return None
 
     def save_image(

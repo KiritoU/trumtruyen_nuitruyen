@@ -22,6 +22,7 @@ def main():
         ic(last_page)
 
         for i in range(last_page, 1, -1):
+            ic(f"Crawling page: {i}")
             _crawler.crawl_page(page=i)
             sleep(CONFIG.WAIT_BETWEEN_ALL)
 
