@@ -226,11 +226,16 @@ class Nuitruyen:
     def insert_comic(self, comic_data: dict):
         thumb_id = self.insert_thumb(comic_data.get("cover_url"))
         timeupdate = self.get_timeupdate()
+
+        description = comic_data.get("description", "")
+        for watermark, watermark_replacement in CONFIG.WATERMARK_REPLACEMENTS.items():
+            description = description.replace(watermark, watermark_replacement)
+
         data = (
             0,
             timeupdate,
             timeupdate,
-            comic_data.get("description", ""),
+            description,
             comic_data["title"],
             "",
             "publish",
