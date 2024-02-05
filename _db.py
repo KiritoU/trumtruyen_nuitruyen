@@ -12,8 +12,8 @@ class Database:
     def get_conn(self):
         try:
             self.conn.ping(reconnect=True)
-            if CONFIG.DEBUG:
-                print("[+] Existing connection: Connected")
+            # if CONFIG.DEBUG:
+            print("[+] Existing connection: Connected")
 
         except:
             print("[+] Getting new connection...")

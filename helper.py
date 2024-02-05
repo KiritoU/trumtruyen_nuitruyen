@@ -30,8 +30,8 @@ class Helper:
         return requests.get(url, headers=self.get_header())
 
     def crawl_soup(self, url):
-        if CONFIG.DEBUG:
-            logging.info(f"[+] Crawling {url}")
+        # if CONFIG.DEBUG:
+        logging.info(f"[+] Crawling {url}")
 
         html = self.download_url(url)
         soup = BeautifulSoup(html.content, "html.parser")
