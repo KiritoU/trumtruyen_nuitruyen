@@ -21,7 +21,7 @@ def main():
         last_page = _crawler.get_trumtruyen_last_page()
         ic(last_page)
 
-        for i in range(1279, 1, -1):
+        for i in range(last_page, 1, -1):
             ic(f"Crawling page: {i}")
             _crawler.crawl_page(page=i)
             sleep(CONFIG.WAIT_BETWEEN_ALL)
