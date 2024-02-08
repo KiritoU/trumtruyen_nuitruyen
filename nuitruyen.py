@@ -32,6 +32,8 @@ class Nuitruyen:
         chapters_slug = [
             chapter[CONFIG.INSERT["posts"].index("post_name")] for chapter in chapters
         ]
+        print(f"[+] Crawled chapters: {chapters_slug}")
+
         return chapters_slug
 
     def insert_postmeta(self, postmeta_data: list, table: str = "postmeta"):
