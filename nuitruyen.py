@@ -29,6 +29,10 @@ class Nuitruyen:
             condition=f'post_parent="{comic_id}" AND post_type="chap"',
         )
 
+        chapter = chapters[0]
+        for i, field_value in enumerate(chapter):
+            print(i, field_value)
+
         chapters_slug = [
             chapter[CONFIG.INSERT["posts"].index("post_name")] for chapter in chapters
         ]
