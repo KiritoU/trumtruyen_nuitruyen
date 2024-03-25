@@ -89,18 +89,29 @@ class Comic:
         return result
 
     def get_last_chapter_page(self, soup: BeautifulSoup) -> int:
+        last_page = 0
+
         try:
             pagination = soup.find("ul", class_="pagination")
             lis = pagination.find_all("li")
-            last_page_li = lis[-2]
-            a = last_page_li.find("a")
-            href = a.get("href")
-            pattern = re.compile(r"trang-(\d+)")
-            matches = pattern.search(href)
-            page = matches.group(1)
-            return int(page)
+            for li in lis:
+                try:
+                    a = li.find("a")
+                    href = a.get("href")
+                    pattern = re.compile(r"trang-(\d+)")
+                    matches = pattern.search(href)
+
+                    page = int(matches.group(1))
+                    if page > last_page:
+                        last_page = page
+
+                except:
+                    pass
         except:
-            return 0
+            pass
+
+        print(f"{last_page = }")
+        return last_page
 
     def get_chapters_href(self, soup: BeautifulSoup, story_href: str) -> dict:
         chapters_dict = self.get_chapters_from_soup(soup=soup)
@@ -150,5 +161,14 @@ class Comic:
             "chapters": chapters_dict,
         }
 
+    def test(self):
+        url = "https://trumtruyen.vn/cam-de"
+        soup = helper.crawl_soup(url)
+
+        chapters_dict = self.get_chapters_href(soup=soup, story_href=url)
+
 
 _comic = Comic()
+
+# if __name__ == "__main__":
+#     _comic.test()
